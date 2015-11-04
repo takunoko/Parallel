@@ -34,7 +34,10 @@ main (int argc, char *argv[])
 	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
 	MPI_Get_processor_name (name, &namelen);
 
+
 	if (rank == 0) {
+
+		printf("you can use resource %d\n", size);
 
 		printf ("Hello world: rank %d of %d running on %s\n", rank, size, name);
 

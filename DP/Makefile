@@ -5,8 +5,9 @@ CC=/usr/local/bin/gcc-5
 
 # 学校環境での利用 icc
 # CC=/opt/intel/bin/icc
-ALL=Xeon_dp Xeon_dp_100_v0 Xeon_dp_100_v1 test_dp
+ALL=Xeon_dp Xeon_dp_100_v0 Xeon_dp_100_v1 Xeon_dp_100_v2 test_dp vec_test
 DPFILES=dragonPole.o
+DPFILES_2=dragonPole_2.o
 
 # OMP_OPTION=-openmp
 OMP_OPTION=-fopenmp
@@ -31,14 +32,23 @@ Xeon_dp_100_v0: Xeon_dp_100_v0.o ${DPFILES}
 Xeon_dp_100_v1: Xeon_dp_100_v1.o ${DPFILES} SFMT.o
 	${CC} ${O_OPTION} -o $@ $^
 
+Xeon_dp_100_v2: Xeon_dp_100_v2.o ${DPFILES_2} SFMT.o
+	${CC} ${O_OPTION} -o $@ $^
+
 test_dp: test_dp.o ${DPFILES}
 	${CC} ${O_OPTION} -o $@ $^
 
 dragonPole.o : dragonPole.c
 	${CC} -c ${C_OPTION} $^
 
+dragonPole_2.o : dragonPole_2.c
+	${CC} -c ${C_OPTION} -ftree-vectorizer-verbose=2 $^
+
 SFMT.o: SFMT.c
 	${CC} -c ${SFMT_OPTION} $^
+
+vec_test: vec_test.c
+	 /usr/local/bin/gcc-5 -o vec_test -ftree-vectorizer-verbose=2 -O3 -fopenmp -openmp-simd vec_test.c
 
 .c.o:
 	${CC} ${C_OPTION} -c $^

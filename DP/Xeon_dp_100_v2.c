@@ -1,4 +1,4 @@
-// $BMp?t$K%a%k%;%s%L%D%$%9%?!<$rMxMQ(B
+// ベクトル化を目標に
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -10,7 +10,7 @@
 
  #include "dragonPole.h"
 
-#define LOOPMAX 1000000000
+#define LOOPMAX 10000000
 
 void dragonpoleMain();
 int calcBattlePoint(int *selection);
@@ -59,7 +59,7 @@ int main(void)
 
     sfmt_t sfmt;
 
-    sfmt_init_gen_rand(&sfmt, (unsigned)time(NULL));  // sfmt$B$rMQ$$$?Mp?t$N=i4|2=(B
+    sfmt_init_gen_rand(&sfmt, (unsigned)time(NULL));  // sfmtを用いた乱数の初期化
 
 	dragonpoleMain();
 
@@ -74,8 +74,8 @@ int main(void)
 	{
 		int max_index[ITEM] = {0};
 		int max_num = 0;
-        sfmt_t sfmt_2; // $BJBNs$7$?ItJ,$GCM$r%3%T!<$9$k2?$+$,$"$C$?5$$,$9$k(B
-        sfmt_2 = sfmt; // $BK\$r8+$FC5$9(B
+        sfmt_t sfmt_2; // 並列した部分で値をコピーする何かがあった気がする
+        sfmt_2 = sfmt; // 本を見て探す
 		for (i=0; i<LOOPMAX; i++){
 			get_rand(selection, &sfmt_2);
 			point = calcBattlePoint(selection);

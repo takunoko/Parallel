@@ -1,0 +1,75 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: main(void)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(void)) [1] vec_test.c(6,15)
+  -> (17,25) calc_vec(int *, int *)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at vec_test.c(11,2)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 12 and  line 13
+   remark #25018: Total number of lines prefetched=4
+LOOP END
+
+LOOP BEGIN at vec_test.c(16,2)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+vec_test.c(7,14):remark #34026: call to memset implemented as a call to optimized library version
+vec_test.c(8,14):remark #34026: call to memset implemented as a call to optimized library version
+===========================================================================
+
+Begin optimization report for: calc_vec(int *, int *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (calc_vec(int *, int *)) [2] vec_test.c(23,31)
+
+
+    Report from: OpenMP optimizations [openmp]
+
+OpenMP Construct at vec_test.c(27,1)
+   remark #16200: OpenMP DEFINED LOOP WAS PARALLELIZED
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at vec_test.c(27,1)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at vec_test.c(27,1)
+   remark #25084: Preprocess Loopnests: Moving Out Store    [ vec_test.c(29,3) ]
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=4
+LOOP END
+
+LOOP BEGIN at vec_test.c(27,1)
+<Alternate Alignment Vectorized Loop>
+   remark #25018: Total number of lines prefetched=4
+LOOP END
+
+LOOP BEGIN at vec_test.c(27,1)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+===========================================================================

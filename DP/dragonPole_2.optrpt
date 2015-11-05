@@ -1,0 +1,69 @@
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: dragonpoleMain()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (dragonpoleMain()) [1] dragonPole_2.c(21,1)
+  -> INLINE: (22,3) getData(void)
+  -> INLINE: (23,3) dispData(void)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at dragonPole_2.c(41,3) inlined into dragonPole_2.c(22,3)
+   remark #15527: loop was not vectorized: function call to fscanf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ dragonPole_2.c(42,5) ]
+LOOP END
+===========================================================================
+
+Begin optimization report for: getData(void)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (getData(void)) [2] dragonPole_2.c(27,1)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at dragonPole_2.c(41,3)
+   remark #15527: loop was not vectorized: function call to fscanf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ dragonPole_2.c(42,5) ]
+LOOP END
+===========================================================================
+
+Begin optimization report for: dispData(void)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (dispData(void)) [3] dragonPole_2.c(48,1)
+
+===========================================================================
+
+Begin optimization report for: calcBattlePoint(int *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (calcBattlePoint(int *)) [4] dragonPole_2.c(61,1)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at dragonPole_2.c(66,3)
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #25438: unrolled without remainder by 2  
+   remark #25456: Number of Array Refs Scalar Replaced In Loop: 2
+   remark #25457: Number of partial sums replaced: 2
+LOOP END
+===========================================================================

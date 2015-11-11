@@ -40,5 +40,5 @@ test_s_loop: test_s_loop.o test_loop.h
 	${CC} -c ${C_OPTION} $^
 	
 clean:
-	rm *.o
-	rm ${ALL}
+	rm -f *.o
+	rm -f ${ALL}

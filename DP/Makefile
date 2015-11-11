@@ -58,5 +58,5 @@ vec_test: vec_test.c
 	${CC} ${C_OPTION} -c $^
 
 clean:
-	rm *.o
-	rm ${ALL}
+	rm -f *.o
+	rm -f ${ALL}

@@ -2,18 +2,18 @@
 # macの場合はbrewで入れた最新版のgccを使うとopenmpが使える
 # 標準のgccでは-fopenmpをつけても使えない
 #
-# CC=/usr/local/bin/gcc-5
-# OMP_OPTION=-fopenmp
-# VEC_REPO=-ftree-vectorizer-verbose=2 
+CC=/usr/local/bin/gcc-5
+OMP_OPTION=-fopenmp
+# VEC_REPO=-ftree-vectorizer-verbose=2
 #
-CC=icc
-OMP_OPTION=-openmp
+# CC=icc
+# OMP_OPTION=-openmp
 # VEC_REPO=-no-vec -qopt-report
-VEC_REPO=-qopt-report
+# VEC_REPO=-qopt-report
 # PHI_OPTION=-mmic
 # PHI_L_OPTION=-Xlinker -rpath -Xlinker /usr/jlocal/mic/lib
 #
-ALL=Xeon_dp Xeon_dp_100_v0 Xeon_dp_100_v1 Xeon_dp_100_v2 test_dp vec_test
+ALL=Xeon_dp Xeon_dp_100_v0 Xeon_dp_100_v1 Xeon_dp_100_v2 Xeon_dp_100_v3 test_dp vec_test
 DPFILES=dragonPole.o
 DPFILES_2=dragonPole_2.o
 
@@ -37,6 +37,9 @@ Xeon_dp_100_v1: Xeon_dp_100_v1.o ${DPFILES} SFMT.o
 	${CC} ${O_OPTION} -o $@ $^
 
 Xeon_dp_100_v2: Xeon_dp_100_v2.o ${DPFILES_2} SFMT.o
+	${CC} ${O_OPTION} -o $@ $^
+
+Xeon_dp_100_v3: Xeon_dp_100_v3.o ${DPFILES_2} SFMT.o
 	${CC} ${O_OPTION} -o $@ $^
 
 test_dp: test_dp.o ${DPFILES}

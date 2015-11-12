@@ -14,7 +14,7 @@ int main(int argc, const char **argv)
 	char prosessor_name[MPI_MAX_PROCESSOR_NAME];
 	int name_len;
 	MPI_Get_processor_name(prosessor_name, &name_len);
-	
+
 	printf("Hello world from processor %s, rak %d"
 			"out of %d processors\n",
 			prosessor_name, world_rank, world_size);

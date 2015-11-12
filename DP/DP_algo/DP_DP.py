@@ -30,9 +30,10 @@ def read_data(FILE_NAME):
 
     return (max_weight, weight_data)
 
+# ,で区切られたN番目(0から開始)がどのデータに対応するか
 # INDEX=0
-VALUE=1
-WEIGHT=2
+VALUE=2
+WEIGHT=1
 
 # 品物を使った時: DIALOG
 # 使わなかった時: TOP
@@ -43,8 +44,6 @@ def dp(max_weight, weight_data):
     data_len = len(weight_data)
     C = [[0 for i in range(max_weight+1)] for j in range(data_len+1)]
     G = [[0 for i in range(max_weight+1)] for j in range(data_len+1)]
-
-    # print(C)
 
     for w in range(max_weight+1):
         G[0][w] = TOP
@@ -73,33 +72,38 @@ def dp(max_weight, weight_data):
                 C[i][j] = C[i-1][j]
                 G[i][j] = TOP
 
-    #print("map")
-    #for c in C:
-    #    for num in c:
-    #        print("%2d " % num),
-    #    print("")
+    # print("map")
+    # for c in C:
+    #     for num in c:
+    #         print("%2d " % num),
+    #     print("")
 
 
-    ## この辺からとても微妙
-    ## 0-1のペアの作り方が謎
-    #print("dialog")
-    #for c in G:
-    #    for num in c:
-    #        print("%2d " % num),
-    #    print("")
+    # print("dialog")
+    # for c in G:
+    #     for num in c:
+    #         print("%2d " % num),
+    #     print("")
 
-    ## 配列を逆順に
-    #i = 0
-    #for c in G:
-    #    G[i].reverse()
-    #    i += 1
-    #G.reverse()
+    # 逆順に答えをたどる
+    # comb は1/0のペア
+    j = max_weight
+    weight = 0
+    comb = []
+    for i in xrange(data_len, 0, -1):
+        if G[i][j] == 1:
+            j -= weight_data[i-1][WEIGHT]
+            weight += weight_data[i-1][WEIGHT]
+            comb.append(1)
+        else:
+            comb.append(0)
+        if j < 0:
+            break;
 
-    #print("dialog_1")
-    #for c in G:
-    #    for num in c:
-    #        print("%2d " % num),
-    #    print("")
+    comb.reverse()
+
+    return (comb, C[data_len][max_weight], weight)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -109,10 +113,12 @@ if __name__ == "__main__":
     FILE_NAME = sys.argv[1]
     file_data = read_data(FILE_NAME)
 
-    print("max_weight: %d" % file_data[0])
-    print("data_len : %d" % len(file_data[1]))
-
     # dp( max_weight, weight_data)
-    dp(file_data[0], file_data[1])
+    comb = dp(file_data[0], file_data[1])
+
+    print("\nvalue : %d | weight : %d" % (comb[1], comb[2]))
+    print('combination: ')
+    for c in comb[0]:
+        print("%d" % c),
 
     print("end calc")

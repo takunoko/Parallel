@@ -26,7 +26,7 @@ def read_data(FILE_NAME):
                 print(line),
         else:   # データが入っている行について
             print("%d, %d, %d" % (int(items[0]), int(items[1]), int(items[2])))
-            weight_data.append(map(int,items))
+            weight_data.append(list(map(int,items)))
 
     return (max_weight, weight_data)
 
@@ -48,10 +48,10 @@ def dp(max_weight, weight_data):
     for w in range(max_weight+1):
         G[0][w] = TOP
 
-    for i in xrange(1,data_len+1):
+    for i in range(1,data_len+1):
         weight = weight_data[i-1][WEIGHT]
         value = weight_data[i-1][VALUE]
-        for j in xrange(1,max_weight+1):
+        for j in range(1,max_weight+1):
             red_val = 0
             # 赤色斜め矢印
             if j-weight > 0:
@@ -90,7 +90,7 @@ def dp(max_weight, weight_data):
     j = max_weight
     weight = 0
     comb = []
-    for i in xrange(data_len, 0, -1):
+    for i in range(data_len, 0, -1):
         if G[i][j] == 1:
             j -= weight_data[i-1][WEIGHT]
             weight += weight_data[i-1][WEIGHT]
@@ -119,6 +119,6 @@ if __name__ == "__main__":
     print("\nvalue : %d | weight : %d" % (comb[1], comb[2]))
     print('combination: ')
     for c in comb[0]:
-        print("%d" % c),
+        print("%d" % (c),end="")
 
-    print("end calc")
+    print("\nend calc")

@@ -1,5 +1,5 @@
 # coding: utf-8
-# 実行環境はとりあえずpython2.X系でnumpyが使える環境
+# 実行環境はとりあえずpython3.X系でnumpyが使える環境
 
 # 動的計画法を用いた0-1ナップサック問題
 # 参考URL : http://judge.u-aizu.ac.jp/onlinejudge/commentary.jsp?id=DPL_1_B
@@ -32,8 +32,8 @@ def read_data(FILE_NAME):
 
 # ,で区切られたN番目(0から開始)がどのデータに対応するか
 # INDEX=0
-VALUE=2
-WEIGHT=1
+VALUE=1
+WEIGHT=2
 
 # 品物を使った時: DIALOG
 # 使わなかった時: TOP
